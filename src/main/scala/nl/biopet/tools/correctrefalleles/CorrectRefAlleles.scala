@@ -2,7 +2,10 @@ package nl.biopet.tools.correctrefalleles
 
 import htsjdk.samtools.reference.IndexedFastaSequenceFile
 import htsjdk.variant.variantcontext._
-import htsjdk.variant.variantcontext.writer.{AsyncVariantContextWriter, VariantContextWriterBuilder}
+import htsjdk.variant.variantcontext.writer.{
+  AsyncVariantContextWriter,
+  VariantContextWriterBuilder
+}
 import htsjdk.variant.vcf.VCFFileReader
 
 import nl.biopet.utils.tool.ToolCommand
@@ -23,7 +26,8 @@ object CorrectRefAlleles extends ToolCommand[Args] {
   }
 
   def correctRefAlleles(cmdArgs: Args): Unit = {
-    logger.warn("This tool will only look ad the GT field and ignores the rest")
+    logger.warn(
+      "This tool will only look ad the GT field and ignores the rest")
     val referenceFile = new IndexedFastaSequenceFile(cmdArgs.referenceFasta)
 
     val reader = new VCFFileReader(cmdArgs.inputFile, false)
@@ -51,7 +55,8 @@ object CorrectRefAlleles extends ToolCommand[Args] {
         }
         val genotypes = record.getGenotypes.map { g =>
           new GenotypeBuilder(g.getSampleName, g.getAlleles.map { a =>
-            if (a.isCalled) alleles.find(_.getBaseString == a.getBaseString).get
+            if (a.isCalled)
+              alleles.find(_.getBaseString == a.getBaseString).get
             else Allele.NO_CALL
           }).make()
         }
