@@ -72,4 +72,22 @@ object CorrectRefAlleles extends ToolCommand[Args] {
     writer.close()
     reader.close()
   }
+
+  def descriptionText: String =
+    """
+      |This tool corrects the reference alleles in a VCF file.
+    """.stripMargin
+
+  def manualText: String =
+    """
+      |This tool corrects the reference alleles in a VCF file,
+      |if the mentioned allele does not match up with the provided
+      |reference.
+      |
+    """.stripMargin
+
+  def exampleText: String =
+    s"""
+       |${example("-I", "input.vcf", "-o output.vcf", "-R", "reference.fa")}
+     """.stripMargin
 }
