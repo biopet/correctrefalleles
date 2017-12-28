@@ -76,18 +76,25 @@ object CorrectRefAlleles extends ToolCommand[Args] {
   def descriptionText: String =
     """
       |This tool corrects the reference alleles in a VCF file.
+      |Some tools switch the `REF` and `ALT` alleles when creating a vcf.
+      |This tool checks what the reference allele is at the given position.
+      |It then checks whether this matches up with the `REF` and `ALT` column
+      |and switches them if necessary.
+      |
     """.stripMargin
 
   def manualText: String =
     """
-      |This tool corrects the reference alleles in a VCF file,
-      |if the mentioned allele does not match up with the provided
-      |reference.
+      |This tool needs a reference genome to check if the stated `REF` allele
+      |at a given position is correct. The contig names of the reference and the
+      |input VCF should match.
       |
     """.stripMargin
 
   def exampleText: String =
     s"""
-       |${example("-I", "input.vcf", "-o output.vcf", "-R", "reference.fa")}
+       |To check if `input.vcf` `REF` and `POS` columns matches with `reference.fa`
+       | and give the corrected vcf as `output.vcf`:
+       |${example("-I", "input.vcf", "-o", "output.vcf", "-R", "reference.fa")}
      """.stripMargin
 }
