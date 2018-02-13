@@ -47,8 +47,7 @@ object CorrectRefAlleles extends ToolCommand[Args] {
   }
 
   def correctRefAlleles(cmdArgs: Args): Unit = {
-    logger.warn(
-      "This tool will only look ad the GT field and ignores the rest")
+    logger.warn("This tool will only look ad the GT field and ignores the rest")
     val referenceFile = new IndexedFastaSequenceFile(cmdArgs.referenceFasta)
 
     val reader = new VCFFileReader(cmdArgs.inputFile, false)
